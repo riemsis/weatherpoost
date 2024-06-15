@@ -1,0 +1,5 @@
+com\example\weatherpost\model\WeatherData.class
+com\example\weatherpost\service\FacebookService.class
+com\example\weatherpost\controller\WeatherController.class
+com\example\weatherpost\service\WeatherService.class
+com\example\weatherpost\WeatherpostApplication.class

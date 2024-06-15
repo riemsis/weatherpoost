@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <title>Publikavimas į Facebook</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        async function postToFacebook() {
+            const message = document.getElementById("message").value;
+            document.getElementById("spinner").style.display = "inline-block"; // Rodyti ratuką
+            const response = await fetch('/api/weather/post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: message })
+            });
+            const data = await response.json();
+            document.getElementById("spinner").style.display = "none"; // Paslėpti ratuką
+            document.getElementById("alert").innerText = data.message;
+            if (data.remainingPosts !== undefined) {
+                document.getElementById("remaining").innerText = "Likę pranešimai šiandien: " + data.remainingPosts;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Publikavimas į Facebook</h1>
+        <input type="text" id="message" placeholder="Įveskite pranešimą">
+        <button onclick="postToFacebook()">Siųsti pranešimą</button>
+        <div id="spinner" class="spinner"></div>
+        <div id="alert" class="alert"></div>
+        <div id="remaining" class="remaining"></div>
+    </div>
+</body>
+</html>
